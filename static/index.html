@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学术论文问答系统</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <div class="logo-area">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <h1>学术问答</h1>
+                </div>
+                <p>上传PDF论文，智能解析问答</p>
+            </header>
+            
+            <div class="upload-section" id="uploadSection">
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p>拖拽或点击上传 PDF</p>
+                    <input type="file" id="fileInput" accept=".pdf" hidden>
+                </div>
+                <div class="upload-status" id="uploadStatus"></div>
+            </div>
+            
+            <div class="files-section" id="filesSection">
+                <div class="section-header">
+                    <h2>已上传文件</h2>
+                    <button id="refreshButton" class="icon-button" title="刷新文件列表">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 4v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4m0 0a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4"></path>
+                            <polyline points="23 10 17 10 13 10 23"></polyline>
+                            <polyline points="1 10 1 4 7 4 7 10"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="files-list" id="filesList">
+                    <div class="empty-files">
+                        <p>暂无上传的文件</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="clearButton" class="danger-button" title="清除所有数据">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6"></path>
+                    </svg>
+                    清空知识库
+                </button>
+            </div>
+        </aside>
+        
+        <main class="chat-main">
+            <div class="chat-container" id="chatContainer">
+                <div class="welcome-message">
+                    <div class="welcome-icon">✨</div>
+                    <h2>欢迎使用学术论文问答系统</h2>
+                    <p>请先在左侧上传 PDF 论文，AI 将为您阅读并解答相关问题。</p>
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <div class="input-wrapper">
+                    <input type="text" id="questionInput" placeholder="基于上传的论文，提出您的问题..." disabled>
+                    <button id="sendButton" disabled>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+                <div class="input-footer">AI 可能会产生误导性信息，请结合文献原文进行核实。</div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modalTitle">文献片段</h3>
+            <p id="modalText"></p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
